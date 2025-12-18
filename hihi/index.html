@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Thiệp nhỏ 💌</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+}
+.card {
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+h2 {
+  margin-bottom: 20px;
+}
+button {
+  padding: 12px 25px;
+  margin: 10px;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.yes {
+  background: #ff4d6d;
+  color: white;
+}
+.no {
+  background: #ddd;
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <h2>Bạn có thích mình không? 💖</h2>
+  <button class="yes" onclick="sendAnswer('Có')">Có</button>
+  <button class="no" onclick="sendAnswer('Không')">Không</button>
+</div>
+
+<script>
+function sendAnswer(answer) {
+  fetch(
+    "https://docs.google.com/forms/d/e/1FAIpQLScB-5-5op2lpvwtSBNeGHBRjAd9I2jZ1W-wJtqNcHa_LTaxPQ/formResponse",
+    {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: "entry.529707351=" + encodeURIComponent(answer)
+    }
+  );
+
+  document.querySelector(".card").innerHTML = `
+    <h2>💌 Mình nhận được rồi!</h2>
+    <p>Cảm ơn bạn nha 🥰</p>
+  `;
+}
+</script>
+
+</body>
+</html>
